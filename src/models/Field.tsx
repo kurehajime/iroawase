@@ -11,8 +11,8 @@ export default class Field {
     static createFillField(): Field {
         const Cells: Cell[] = []
         for (let i = 0; i < 9 * 18; i++) {
-            const rand = Math.floor(Math.random() * 4)
-            Cells.push(new Cell(rand as CellType))
+            const rand = Math.floor(Math.random() * 4) + 1
+            Cells.push(new Cell(i, rand as CellType))
         }
         return new Field(Cells)
     }
