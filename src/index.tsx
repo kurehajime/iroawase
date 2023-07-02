@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom/client'
 import './index.css'
+import GameElement from './components/GameElement'
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -7,6 +8,6 @@ const root = ReactDOM.createRoot(
 
 root.render(<div className='container'>
     <div className='outbox'>
-        aaa
+        <GameElement />
     </div>
 </div>)
