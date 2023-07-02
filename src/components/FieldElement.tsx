@@ -4,6 +4,7 @@ import CellElement from "./CellElements"
 
 type Props = {
     field: Field
+    onClick: (n: number) => void
 }
 export default function FieldElement(props: Props) {
     return (
@@ -17,6 +18,7 @@ export default function FieldElement(props: Props) {
                     return (
                         <CellElement key={index} cell={cell}
                             x={x} y={y}
+                            onClick={props.onClick}
                         />
                     )
                 })

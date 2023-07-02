@@ -4,11 +4,12 @@ import { BLOCK_SIZE } from "../utils/Conf"
 type Props = {
     x: number,
     y: number,
-    cell: Cell
+    cell: Cell,
+    onClick: (n: number) => void
 }
 export default function CellElement(props: Props) {
     return (
-        <g>
+        <g onClick={() => props.onClick(props.cell.Index)}>
             <rect x={props.x} y={props.y}
                 width={BLOCK_SIZE} height={BLOCK_SIZE}
                 fill="white"
