@@ -1,8 +1,7 @@
 export const CellType = {
-    N1: 1,
-    N2: 2,
-    N3: 3,
-    N4: 4,
+    Gu: 1,
+    Choki: 2,
+    Pa: 3
 } as const;
 
 export type CellType = typeof CellType[keyof typeof CellType];
