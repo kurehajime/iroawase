@@ -36,7 +36,10 @@ export default class GameMaster {
             const y = Math.floor(i / COLS)
             const x = i % COLS
             if (y !== index) continue
-            const x2 = (x + inc) % COLS
+            let x2 = (x + inc) % COLS
+            if (x2 < 0) {
+                x2 = COLS + x2
+            }
             const index2 = y * COLS + x2
             newMap[i] = map[index2]
         }
@@ -48,7 +51,10 @@ export default class GameMaster {
             const y = Math.floor(i / COLS)
             const x = i % COLS
             if (x !== index) continue
-            const y2 = (y + inc) % ROWS
+            let y2 = (y + inc) % ROWS
+            if (y2 < 0) {
+                y2 = ROWS + y2
+            }
             const index2 = y2 * COLS + x
             newMap[i] = map[index2]
         }
