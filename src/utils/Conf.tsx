@@ -1,4 +1,4 @@
-export const BLOCK_SIZE = 48;
+export const BLOCK_SIZE = 96;
 export const COLS = 4;
 export const ROWS = 4;
 export const WIDTH = BLOCK_SIZE * COLS;
