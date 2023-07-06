@@ -4,6 +4,13 @@ import Cell from "./Cell"
 import Field from "./Field"
 
 export default class GameMaster {
+    static fromArray(array: number[]): Field {
+        const Cells: Cell[] = []
+        for (let i = 0; i < COLS * ROWS; i++) {
+            Cells.push(new Cell(i, array[i] as CellType))
+        }
+        return new Field(Cells)
+    }
     static createFillField(): Field {
         const init =
             [1, 1, 2, 2,
@@ -11,26 +18,31 @@ export default class GameMaster {
                 3, 3, 4, 4,
                 3, 3, 4, 4]
         const map = GameMaster.shuffleMap(init)
-        const Cells: Cell[] = []
-        for (let i = 0; i < COLS * ROWS; i++) {
-            Cells.push(new Cell(i, map[i] as CellType))
-        }
-        return new Field(Cells)
+        return GameMaster.fromArray(map)
     }
     static shuffleMap(map: number[]): number[] {
         let newMap = [...map]
         for (let i = 0; i < 10; i++) {
             if (i % 2 === 0) {
                 const index = Math.floor(Math.random() * ROWS)
-                newMap = this.shiftHorizon(newMap, index, 1)
+                newMap = GameMaster.shiftHorizon(newMap, index, 1)
             } else {
                 const index = Math.floor(Math.random() * COLS)
-                newMap = this.shiftVertical(newMap, index, 1)
+                newMap = GameMaster.shiftVertical(newMap, index, 1)
             }
         }
         return newMap
     }
-    static shiftHorizon(map: number[], index: number, inc: number): number[] {
+
+    static shiftHorizonField(field: Field, index: number, inc: number): Field {
+        const map = field.Cells.map(cell => cell.CellType)
+        return GameMaster.fromArray(GameMaster.shiftHorizon(map, index, inc))
+    }
+    static shiftVerticalField(field: Field, index: number, inc: number): Field {
+        const map = field.Cells.map(cell => cell.CellType)
+        return GameMaster.fromArray(GameMaster.shiftVertical(map, index, inc))
+    }
+    private static shiftHorizon(map: number[], index: number, inc: number): number[] {
         const newMap = [...map]
         for (let i = 0; i < map.length; i++) {
             const y = Math.floor(i / COLS)
@@ -45,7 +57,7 @@ export default class GameMaster {
         }
         return newMap
     }
-    static shiftVertical(map: number[], index: number, inc: number): number[] {
+    private static shiftVertical(map: number[], index: number, inc: number): number[] {
         const newMap = [...map]
         for (let i = 0; i < map.length; i++) {
             const y = Math.floor(i / COLS)

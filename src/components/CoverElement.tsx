@@ -41,7 +41,7 @@ export default function CoverElement(props: Props) {
             const x = mouseX
             const y = mouseY
             if (Math.sqrt((x - mouseStartX) ** 2 + (y - mouseStartY) ** 2) < 20) {
-                return;
+                // return;
             }
             setMouseX(x)
             setMouseY(y)
@@ -60,7 +60,10 @@ export default function CoverElement(props: Props) {
     }
 
     const clicked = (x: number, y: number, touched = false) => {
-        props.clicked({ x: Math.floor(x / BLOCK_SIZE), y: Math.floor(y / BLOCK_SIZE) }, touched)
+        props.clicked({
+            x: Math.floor(x / BLOCK_SIZE),
+            y: Math.floor(y / BLOCK_SIZE),
+        }, touched)
     }
 
     useEffect(() => {

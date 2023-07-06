@@ -7,7 +7,7 @@ import CoverElement from "./CoverElement"
 
 type Props = {
     field: Field
-    onClick: (n: number) => void
+    shift: (cursor: Point, inc: Point) => void
 }
 export default function FieldElement(props: Props) {
     const [selected, setSelected] = React.useState<Point | null>(null)
@@ -16,11 +16,20 @@ export default function FieldElement(props: Props) {
         if (selected) {
             setSelected(null)
             setTouched(false)
-            console.log("はなす", point, touched)
+
+            if (point.x === selected.x || point.y === selected.y) {
+                const xx = point.x - selected.x
+                const yy = point.y - selected.y
+                if (xx !== 0) {
+                    props.shift({ x: point.x, y: point.y }, { x: xx, y: 0 })
+                }
+                if (yy !== 0) {
+                    props.shift({ x: point.x, y: point.y }, { x: 0, y: yy })
+                }
+            }
         } else {
             setSelected({ ...point })
             setTouched(touched)
-            console.log("つかむ", point, touched)
         }
     }
     return (
@@ -34,7 +43,6 @@ export default function FieldElement(props: Props) {
                     return (
                         <CellElement key={index} cell={cell}
                             x={x} y={y}
-                            onClick={props.onClick}
                         />
                     )
                 })

@@ -5,11 +5,10 @@ type Props = {
     x: number,
     y: number,
     cell: Cell,
-    onClick: (n: number) => void
 }
 export default function CellElement(props: Props) {
     return (
-        <g onClick={() => props.onClick(props.cell.Index)}>
+        <g>
             <rect x={props.x} y={props.y}
                 width={BLOCK_SIZE} height={BLOCK_SIZE}
                 fill={
