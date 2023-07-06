@@ -12,15 +12,13 @@ export default function CellElement(props: Props) {
             <rect x={props.x} y={props.y}
                 width={BLOCK_SIZE} height={BLOCK_SIZE}
                 fill={
-                    props.cell.CellType === 1 ? "red" :
-                        props.cell.CellType === 2 ? "orange" :
-                            props.cell.CellType === 3 ? "yellow" :
-                                props.cell.CellType === 4 ? "green" :
-                                    props.cell.CellType === 5 ? "blue" :
-                                        props.cell.CellType === 6 ? "purple" :
-                                            "white"
+                    props.cell.CellType === 1 ? "#FF0F77" :
+                        props.cell.CellType === 2 ? "#FFDE05" :
+                            props.cell.CellType === 3 ? "#93E01F" :
+                                props.cell.CellType === 4 ? "#19A3FE" :
+                                    "white"
                 }
-                stroke="black"
+                stroke="#3B495E"
             ></rect>
             <text x={props.x + BLOCK_SIZE / 2}
                 y={props.y + BLOCK_SIZE / 2}
@@ -28,7 +26,7 @@ export default function CellElement(props: Props) {
                 alignmentBaseline="central"
                 fontSize={BLOCK_SIZE / 2}
             >{
-                    props.cell.CellType
+                    // props.cell.CellType
                 }</text>
         </g>
     )
