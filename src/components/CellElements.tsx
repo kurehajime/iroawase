@@ -25,8 +25,13 @@ export default function CellElement(props: Props) {
                 textAnchor="middle"
                 alignmentBaseline="central"
                 fontSize={BLOCK_SIZE / 2}
+                opacity={0.9}
             >{
-                    // props.cell.CellType
+                    props.cell.CellType === 1 ? "♥" :
+                        props.cell.CellType === 2 ? "♦" :
+                            props.cell.CellType === 3 ? "♣" :
+                                props.cell.CellType === 4 ? "♠" :
+                                    "white"
                 }</text>
         </g>
     )
