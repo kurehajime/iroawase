@@ -52,6 +52,9 @@ export default function FieldElement(props: Props) {
                 y={0}
                 clicked={clicked}
                 selected={selected}
+                moved={(point) => {
+                    console.log(point.x, point.y)
+                }}
             />
         </g>
     )

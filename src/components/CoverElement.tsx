@@ -6,6 +6,7 @@ type Props = {
     x: number,
     y: number,
     clicked: (point: Point, touched: boolean) => void
+    moved: (point: Point) => void
     selected: Point | null
 }
 export default function CoverElement(props: Props) {
@@ -55,6 +56,15 @@ export default function CoverElement(props: Props) {
         const rect = (e.target as SVGSVGElement).getBoundingClientRect()
         const x = (e.clientX - window.pageXOffset - rect.left)
         const y = (e.clientY - window.pageYOffset - rect.top)
+        if (props.selected) {
+            const diff_x = x - mouseStartX
+            const diff_y = y - mouseStartY
+            if (Math.abs(diff_x) < Math.abs(diff_y)) {
+                props.moved({ x: 0, y: diff_y })
+            } else {
+                props.moved({ x: diff_x, y: 0 })
+            }
+        }
         setMouseX(x)
         setMouseY(y)
     }

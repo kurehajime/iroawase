@@ -72,15 +72,4 @@ export default class GameMaster {
         }
         return newMap
     }
-    static incrementField(field: Field, index: number): Field {
-        const cells = field.Cells.map((cell, i) => {
-            if (i === index && cell.CellType < MAX_NUM) {
-                return new Cell(i, cell.CellType + 1 as CellType)
-            } else if (i === index) {
-                return new Cell(i, 1 as CellType)
-            }
-            return new Cell(i, cell.CellType)
-        })
-        return new Field(cells)
-    }
 }
