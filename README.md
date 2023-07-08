@@ -1,3 +1,2 @@
-# pluplu
-詳細未定
+# Swish Swoosh
 https://kurehajime.github.io/swish_swoosh/
