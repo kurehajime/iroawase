@@ -60,9 +60,23 @@ export default function FieldElement(props: Props) {
                         y += diff.y
                     }
                     return (
-                        <CellElement key={index} cell={cell}
-                            x={x} y={y}
-                        />
+                        <g key={index}>
+                            < CellElement cell={cell}
+                                x={x} y={y}
+                            />
+                            < CellElement cell={cell}
+                                x={x + 1 * (BLOCK_SIZE * COLS)} y={y + 0 * (BLOCK_SIZE * ROWS)}
+                            />
+                            < CellElement cell={cell}
+                                x={x + 0 * (BLOCK_SIZE * COLS)} y={y + 1 * (BLOCK_SIZE * ROWS)}
+                            />
+                            < CellElement cell={cell}
+                                x={x + -1 * (BLOCK_SIZE * COLS)} y={y + 0 * (BLOCK_SIZE * ROWS)}
+                            />
+                            < CellElement cell={cell}
+                                x={x + 0 * (BLOCK_SIZE * COLS)} y={y + -1 * (BLOCK_SIZE * ROWS)}
+                            />
+                        </g>
                     )
                 })
             }
@@ -73,6 +87,6 @@ export default function FieldElement(props: Props) {
                 selected={selected}
                 moved={moved}
             />
-        </g>
+        </g >
     )
 }
