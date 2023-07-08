@@ -36,8 +36,13 @@ export default function FieldElement(props: Props) {
     }
 
     const moved = (target: Point | null, point: Point | null) => {
-        setDiff(point)
-        setTarget(target)
+        if (target && selected && target.x !== selected.x && target.y !== selected.y) {
+            setDiff(null)
+            setTarget(null)
+        } else {
+            setDiff(point)
+            setTarget(target)
+        }
     }
 
     return (
