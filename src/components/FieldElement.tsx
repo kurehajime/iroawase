@@ -12,6 +12,8 @@ type Props = {
 export default function FieldElement(props: Props) {
     const [selected, setSelected] = React.useState<Point | null>(null)
     const [touched, setTouched] = React.useState<boolean>(false)
+    const [diff, setDiff] = React.useState<Point | null>(null)
+    const [target, setTarget] = React.useState<Point | null>(null)
     const clicked = (point: Point, touched = false) => {
         if (selected) {
             setSelected(null)
@@ -32,14 +34,26 @@ export default function FieldElement(props: Props) {
             setTouched(touched)
         }
     }
+
+    const moved = (target: Point | null, point: Point | null) => {
+        setDiff(point)
+        setTarget(target)
+    }
+
     return (
         <g>
             {
                 props.field.Cells.map((cell, index) => {
                     const ix = index % COLS
                     const iy = Math.floor(index / ROWS)
-                    const x = ix * BLOCK_SIZE
-                    const y = iy * BLOCK_SIZE
+                    let x = ix * BLOCK_SIZE
+                    let y = iy * BLOCK_SIZE
+                    if (diff && target && target.y === iy) {
+                        x += diff.x
+                    }
+                    if (diff && target && target.x === ix) {
+                        y += diff.y
+                    }
                     return (
                         <CellElement key={index} cell={cell}
                             x={x} y={y}
@@ -52,9 +66,7 @@ export default function FieldElement(props: Props) {
                 y={0}
                 clicked={clicked}
                 selected={selected}
-                moved={(point) => {
-                    console.log(point.x, point.y)
-                }}
+                moved={moved}
             />
         </g>
     )

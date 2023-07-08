@@ -6,7 +6,7 @@ type Props = {
     x: number,
     y: number,
     clicked: (point: Point, touched: boolean) => void
-    moved: (point: Point) => void
+    moved: (target: Point | null, point: Point | null) => void
     selected: Point | null
 }
 export default function CoverElement(props: Props) {
@@ -47,6 +47,7 @@ export default function CoverElement(props: Props) {
             setMouseX(x)
             setMouseY(y)
             clicked(x, y, true)
+            props.moved(null, null)
         }
         e.preventDefault()
     }
@@ -60,9 +61,15 @@ export default function CoverElement(props: Props) {
             const diff_x = x - mouseStartX
             const diff_y = y - mouseStartY
             if (Math.abs(diff_x) < Math.abs(diff_y)) {
-                props.moved({ x: 0, y: diff_y })
+                props.moved({
+                    x: Math.floor(x / BLOCK_SIZE),
+                    y: Math.floor(y / BLOCK_SIZE),
+                }, { x: 0, y: diff_y })
             } else {
-                props.moved({ x: diff_x, y: 0 })
+                props.moved({
+                    x: Math.floor(x / BLOCK_SIZE),
+                    y: Math.floor(y / BLOCK_SIZE),
+                }, { x: diff_x, y: 0 })
             }
         }
         setMouseX(x)
