@@ -1,5 +1,5 @@
 import Cell from "../models/Cell"
-import { BLOCK_SIZE } from "../utils/Conf"
+import { BLOCK_SIZE, COLORS, SUIT } from "../utils/Conf"
 
 type Props = {
     x: number,
@@ -12,10 +12,10 @@ export default function CellElement(props: Props) {
             <rect x={props.x} y={props.y}
                 width={BLOCK_SIZE} height={BLOCK_SIZE}
                 fill={
-                    props.cell.CellType === 1 ? "#FF0F77" :
-                        props.cell.CellType === 2 ? "#FFDE05" :
-                            props.cell.CellType === 3 ? "#93E01F" :
-                                props.cell.CellType === 4 ? "#19A3FE" :
+                    props.cell.CellType === 1 ? COLORS[0] :
+                        props.cell.CellType === 2 ? COLORS[1] :
+                            props.cell.CellType === 3 ? COLORS[2] :
+                                props.cell.CellType === 4 ? COLORS[3] :
                                     "white"
                 }
                 stroke="#3B495E"
@@ -27,10 +27,10 @@ export default function CellElement(props: Props) {
                 fontSize={BLOCK_SIZE / 2}
                 opacity={0.9}
             >{
-                    props.cell.CellType === 1 ? "♥" :
-                        props.cell.CellType === 2 ? "♦" :
-                            props.cell.CellType === 3 ? "♣" :
-                                props.cell.CellType === 4 ? "♠" :
+                    props.cell.CellType === 1 ? SUIT[0] :
+                        props.cell.CellType === 2 ? SUIT[1] :
+                            props.cell.CellType === 3 ? SUIT[2] :
+                                props.cell.CellType === 4 ? SUIT[3] :
                                     "white"
                 }</text>
         </g>

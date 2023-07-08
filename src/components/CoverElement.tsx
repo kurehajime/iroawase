@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { BLOCK_SIZE, WIDTH } from "../utils/Conf"
+import { BLOCK_SIZE, PAD, WIDTH } from "../utils/Conf"
 import { Point } from "../models/Point"
 
 type Props = {
@@ -62,13 +62,13 @@ export default function CoverElement(props: Props) {
             const diff_y = y - mouseStartY
             if (Math.abs(diff_x) < Math.abs(diff_y)) {
                 props.moved({
-                    x: Math.floor(x / BLOCK_SIZE),
-                    y: Math.floor(y / BLOCK_SIZE),
+                    x: Math.floor((x - PAD) / BLOCK_SIZE),
+                    y: Math.floor((y - PAD) / BLOCK_SIZE),
                 }, { x: 0, y: diff_y })
             } else {
                 props.moved({
-                    x: Math.floor(x / BLOCK_SIZE),
-                    y: Math.floor(y / BLOCK_SIZE),
+                    x: Math.floor((x - PAD) / BLOCK_SIZE),
+                    y: Math.floor((y - PAD) / BLOCK_SIZE),
                 }, { x: diff_x, y: 0 })
             }
         }
@@ -78,8 +78,8 @@ export default function CoverElement(props: Props) {
 
     const clicked = (x: number, y: number, touched = false) => {
         props.clicked({
-            x: Math.floor(x / BLOCK_SIZE),
-            y: Math.floor(y / BLOCK_SIZE),
+            x: Math.floor((x - PAD) / BLOCK_SIZE),
+            y: Math.floor((y - PAD) / BLOCK_SIZE),
         }, touched)
     }
 

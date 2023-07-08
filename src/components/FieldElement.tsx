@@ -1,9 +1,10 @@
 import React from "react"
 import Field from "../models/Field"
 import { Point } from "../models/Point"
-import { BLOCK_SIZE, COLS, ROWS } from "../utils/Conf"
+import { BLOCK_SIZE, COLS, PAD, ROWS } from "../utils/Conf"
 import CellElement from "./CellElements"
 import CoverElement from "./CoverElement"
+import FrameElement from "./FrameElement"
 
 type Props = {
     field: Field
@@ -62,24 +63,25 @@ export default function FieldElement(props: Props) {
                     return (
                         <g key={index}>
                             < CellElement cell={cell}
-                                x={x} y={y}
+                                x={x + PAD} y={y + PAD}
                             />
                             < CellElement cell={cell}
-                                x={x + 1 * (BLOCK_SIZE * COLS)} y={y + 0 * (BLOCK_SIZE * ROWS)}
+                                x={x + PAD + 1 * (BLOCK_SIZE * COLS)} y={y + PAD + 0 * (BLOCK_SIZE * ROWS)}
                             />
                             < CellElement cell={cell}
-                                x={x + 0 * (BLOCK_SIZE * COLS)} y={y + 1 * (BLOCK_SIZE * ROWS)}
+                                x={x + PAD + 0 * (BLOCK_SIZE * COLS)} y={y + PAD + 1 * (BLOCK_SIZE * ROWS)}
                             />
                             < CellElement cell={cell}
-                                x={x + -1 * (BLOCK_SIZE * COLS)} y={y + 0 * (BLOCK_SIZE * ROWS)}
+                                x={x + PAD + -1 * (BLOCK_SIZE * COLS)} y={y + PAD + 0 * (BLOCK_SIZE * ROWS)}
                             />
                             < CellElement cell={cell}
-                                x={x + 0 * (BLOCK_SIZE * COLS)} y={y + -1 * (BLOCK_SIZE * ROWS)}
+                                x={x + PAD + 0 * (BLOCK_SIZE * COLS)} y={y + PAD + -1 * (BLOCK_SIZE * ROWS)}
                             />
                         </g>
                     )
                 })
             }
+            <FrameElement />
             <CoverElement
                 x={0}
                 y={0}
