@@ -6,14 +6,14 @@ export const WIDTH = (BLOCK_SIZE * COLS) + PAD * 2;
 export const HEIGHT = (BLOCK_SIZE * ROWS) + PAD * 2;
 export const COLORS = [
     "#19A3FE",
-    "#FFDE05",
     "#93E01F",
+    "#FFDE05",
     "#FF0F77",
 ]
 export const SUIT = [
     "♠",
-    "♦",
     "♣",
+    "♦",
     "♥",
 ]
 export const MAX_NUM = 4;
