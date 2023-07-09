@@ -6,12 +6,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 100px;
+    padding: 30px;
     user-select: none;
 }
 
 .outbox {
-    width: 550px;
+    width: 400px;
 }
 
 .canv {
