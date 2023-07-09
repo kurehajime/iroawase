@@ -5,10 +5,13 @@ import { BLOCK_SIZE, COLS, PAD, ROWS } from "../utils/Conf"
 import CellElement from "./CellElements"
 import CoverElement from "./CoverElement"
 import FrameElement from "./FrameElement"
+import StartElement from "./StartElement"
 
 type Props = {
     field: Field
     shift: (cursor: Point, inc: Point) => void
+    start: () => void
+    started: boolean
 }
 export default function FieldElement(props: Props) {
     const [selected, setSelected] = React.useState<Point | null>(null)
@@ -89,6 +92,11 @@ export default function FieldElement(props: Props) {
                 selected={selected}
                 moved={moved}
             />
+            {
+                !props.started && <StartElement start={() => {
+                    props.start()
+                }} />
+            }
         </g >
     )
 }

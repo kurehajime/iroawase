@@ -11,6 +11,15 @@ export default class GameMaster {
         }
         return new Field(Cells)
     }
+    static createInitField(): Field {
+        const init =
+            [1, 1, 2, 2,
+                1, 1, 2, 2,
+                3, 3, 4, 4,
+                3, 3, 4, 4]
+        return GameMaster.fromArray(init)
+    }
+
     static createFillField(): Field {
         const init =
             [1, 1, 2, 2,
