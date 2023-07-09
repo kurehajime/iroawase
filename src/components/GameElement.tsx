@@ -19,7 +19,8 @@ export default function GameElement() {
     }
 
     return (
-        <svg width={WIDTH} height={HEIGHT}>
+        <svg width={WIDTH} height={HEIGHT}
+            className="canv">
             <FieldElement field={field}
                 shift={shift}
                 start={() => {

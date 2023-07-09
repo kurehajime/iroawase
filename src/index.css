@@ -13,3 +13,7 @@ body {
 .outbox {
     width: 550px;
 }
+
+.canv {
+    touch-action: none;
+}
