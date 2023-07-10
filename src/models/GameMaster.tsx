@@ -1,9 +1,15 @@
+import { t } from "i18next"
 import { CellType } from "../utils/CellType"
 import { COLS, MAX_NUM, ROWS } from "../utils/Conf"
 import Cell from "./Cell"
 import Field from "./Field"
 
 export default class GameMaster {
+    static initMap =
+        [1, 1, 2, 2,
+            1, 1, 2, 2,
+            3, 3, 4, 4,
+            3, 3, 4, 4]
     static fromArray(array: number[]): Field {
         const Cells: Cell[] = []
         for (let i = 0; i < COLS * ROWS; i++) {
@@ -12,23 +18,22 @@ export default class GameMaster {
         return new Field(Cells)
     }
     static createInitField(): Field {
-        const init =
-            [1, 1, 2, 2,
-                1, 1, 2, 2,
-                3, 3, 4, 4,
-                3, 3, 4, 4]
-        return GameMaster.fromArray(init)
+        return GameMaster.fromArray(GameMaster.initMap)
     }
 
     static createFillField(): Field {
-        const init =
-            [1, 1, 2, 2,
-                1, 1, 2, 2,
-                3, 3, 4, 4,
-                3, 3, 4, 4]
-        const map = GameMaster.shuffleMap(init)
+        const map = GameMaster.shuffleMap(GameMaster.initMap)
         return GameMaster.fromArray(map)
     }
+    static complete(field: Field): boolean {
+        for (let i = 0; i < field.Cells.length; i++) {
+            if (field.Cells[i].CellType !== this.initMap[i]) {
+                return false
+            }
+        }
+        return true
+    }
+
     static shuffleMap(map: number[]): number[] {
         let newMap = [...map]
         for (let i = 0; i < 10; i++) {

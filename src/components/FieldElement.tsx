@@ -6,12 +6,15 @@ import CellElement from "./CellElements"
 import CoverElement from "./CoverElement"
 import FrameElement from "./FrameElement"
 import StartElement from "./StartElement"
+import EndElement from "./EndElement"
 
 type Props = {
     field: Field
     shift: (cursor: Point, inc: Point) => void
     start: () => void
+    end: () => void
     started: boolean
+    ended: boolean
 }
 export default function FieldElement(props: Props) {
     const [selected, setSelected] = React.useState<Point | null>(null)
@@ -97,6 +100,10 @@ export default function FieldElement(props: Props) {
                     props.start()
                 }} />
             }
+            {
+                props.ended && <EndElement />
+            }
+
         </g >
     )
 }
