@@ -12,6 +12,7 @@ const SUIT = [
 ]
 export type Conf = {
     BLOCK_SIZE: number,
+    BLOCK_SIZE3: number,
     COLS: number,
     ROWS: number,
     PAD: number,
@@ -20,6 +21,8 @@ export type Conf = {
     COLORS: string[],
     SUIT: string[],
     MAX_NUM: number,
+    INIT_MAP: number[],
+    SHUFFLE_COUNT: number,
 }
 export type Mode = "normal" | "hard"
 export class ConfBuilder {
@@ -31,8 +34,20 @@ export class ConfBuilder {
         const pad = 8;
         const width = (blockSize * cols) + pad * 2;
         const height = (blockSize * rows) + pad * 2;
+        const initMap = mode === "normal" ?
+            [1, 1, 2, 2,
+                1, 1, 2, 2,
+                3, 3, 4, 4,
+                3, 3, 4, 4] :
+            [1, 1, 1, 2, 2, 2,
+                1, 1, 1, 2, 2, 2,
+                1, 1, 1, 2, 2, 2,
+                3, 3, 3, 4, 4, 4,
+                3, 3, 3, 4, 4, 4,
+                3, 3, 3, 4, 4, 4]
         return {
             BLOCK_SIZE: blockSize,
+            BLOCK_SIZE3: 96,
             COLS: cols,
             ROWS: rows,
             PAD: pad,
@@ -41,6 +56,8 @@ export class ConfBuilder {
             COLORS: COLORS,
             SUIT: SUIT,
             MAX_NUM: maxNum,
+            INIT_MAP: initMap,
+            SHUFFLE_COUNT: mode === "normal" ? 10 : 100,
         }
     }
 }

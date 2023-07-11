@@ -4,11 +4,6 @@ import Cell from "./Cell"
 import Field from "./Field"
 
 export default class GameMaster {
-    static initMap =
-        [1, 1, 2, 2,
-            1, 1, 2, 2,
-            3, 3, 4, 4,
-            3, 3, 4, 4]
     static fromArray(conf: Conf, array: number[]): Field {
         const Cells: Cell[] = []
         for (let i = 0; i < conf.COLS * conf.ROWS; i++) {
@@ -17,16 +12,16 @@ export default class GameMaster {
         return new Field(Cells)
     }
     static createInitField(conf: Conf): Field {
-        return GameMaster.fromArray(conf, GameMaster.initMap)
+        return GameMaster.fromArray(conf, conf.INIT_MAP)
     }
 
     static createFillField(conf: Conf,): Field {
-        const map = GameMaster.shuffleMap(conf, GameMaster.initMap)
+        const map = GameMaster.shuffleMap(conf, conf.INIT_MAP)
         return GameMaster.fromArray(conf, map)
     }
     static complete(conf: Conf, field: Field): boolean {
         for (let i = 0; i < field.Cells.length; i++) {
-            if (field.Cells[i].CellType !== this.initMap[i]) {
+            if (field.Cells[i].CellType !== conf.INIT_MAP[i]) {
                 return false
             }
         }
@@ -35,7 +30,7 @@ export default class GameMaster {
 
     static shuffleMap(conf: Conf, map: number[]): number[] {
         let newMap = [...map]
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < conf.SHUFFLE_COUNT; i++) {
             if (i % 2 === 0) {
                 const index = Math.floor(Math.random() * conf.ROWS)
                 newMap = GameMaster.shiftHorizon(conf, newMap, index, 1)

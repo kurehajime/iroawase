@@ -27,7 +27,7 @@ export default function EndElement(props: Props) {
                 width={props.conf.WIDTH / 2} height={props.conf.HEIGHT / 2}
                 fill={props.conf.COLORS[3]}
             ></rect>
-            <text x={props.conf.PAD} y={props.conf.HEIGHT / 2 - props.conf.BLOCK_SIZE}
+            <text x={props.conf.PAD} y={props.conf.HEIGHT / 2 - props.conf.BLOCK_SIZE3}
                 fontSize="95"
                 fontWeight="bold"
                 fill="white"
@@ -43,7 +43,7 @@ export default function EndElement(props: Props) {
                 className="end">
                 ATULA
             </text>
-            <text x={props.conf.PAD} y={props.conf.HEIGHT / 2 + props.conf.BLOCK_SIZE}
+            <text x={props.conf.PAD} y={props.conf.HEIGHT / 2 + props.conf.BLOCK_SIZE3}
                 fontSize="95"
                 fontWeight="bold"
                 fill="white"
