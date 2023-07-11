@@ -1,7 +1,7 @@
 import React from "react"
 import Field from "../models/Field"
 import { Point } from "../models/Point"
-import { BLOCK_SIZE, COLS, PAD, ROWS } from "../utils/Conf"
+import { Conf } from "../utils/Conf"
 import CellElement from "./CellElements"
 import CoverElement from "./CoverElement"
 import FrameElement from "./FrameElement"
@@ -15,6 +15,7 @@ type Props = {
     end: () => void
     started: boolean
     ended: boolean
+    conf: Conf
 }
 export default function FieldElement(props: Props) {
     const [selected, setSelected] = React.useState<Point | null>(null)
@@ -56,10 +57,10 @@ export default function FieldElement(props: Props) {
         <g>
             {
                 props.field.Cells.map((cell, index) => {
-                    const ix = index % COLS
-                    const iy = Math.floor(index / ROWS)
-                    let x = ix * BLOCK_SIZE
-                    let y = iy * BLOCK_SIZE
+                    const ix = index % props.conf.COLS
+                    const iy = Math.floor(index / props.conf.ROWS)
+                    let x = ix * props.conf.BLOCK_SIZE
+                    let y = iy * props.conf.BLOCK_SIZE
                     if (diff && target && target.y === iy) {
                         x += diff.x
                     }
@@ -69,39 +70,48 @@ export default function FieldElement(props: Props) {
                     return (
                         <g key={index}>
                             < CellElement cell={cell}
-                                x={x + PAD} y={y + PAD}
+                                x={x + props.conf.PAD} y={y + props.conf.PAD}
+                                conf={props.conf}
                             />
                             < CellElement cell={cell}
-                                x={x + PAD + 1 * (BLOCK_SIZE * COLS)} y={y + PAD + 0 * (BLOCK_SIZE * ROWS)}
+                                x={x + props.conf.PAD + 1 * (props.conf.BLOCK_SIZE * props.conf.COLS)} y={y + props.conf.PAD + 0 * (props.conf.BLOCK_SIZE * props.conf.ROWS)}
+                                conf={props.conf}
                             />
                             < CellElement cell={cell}
-                                x={x + PAD + 0 * (BLOCK_SIZE * COLS)} y={y + PAD + 1 * (BLOCK_SIZE * ROWS)}
+                                x={x + props.conf.PAD + 0 * (props.conf.BLOCK_SIZE * props.conf.COLS)} y={y + props.conf.PAD + 1 * (props.conf.BLOCK_SIZE * props.conf.ROWS)}
+                                conf={props.conf}
                             />
                             < CellElement cell={cell}
-                                x={x + PAD + -1 * (BLOCK_SIZE * COLS)} y={y + PAD + 0 * (BLOCK_SIZE * ROWS)}
+                                x={x + props.conf.PAD + -1 * (props.conf.BLOCK_SIZE * props.conf.COLS)} y={y + props.conf.PAD + 0 * (props.conf.BLOCK_SIZE * props.conf.ROWS)}
+                                conf={props.conf}
                             />
                             < CellElement cell={cell}
-                                x={x + PAD + 0 * (BLOCK_SIZE * COLS)} y={y + PAD + -1 * (BLOCK_SIZE * ROWS)}
+                                x={x + props.conf.PAD + 0 * (props.conf.BLOCK_SIZE * props.conf.COLS)} y={y + props.conf.PAD + -1 * (props.conf.BLOCK_SIZE * props.conf.ROWS)}
+                                conf={props.conf}
                             />
                         </g>
                     )
                 })
             }
-            <FrameElement />
+            <FrameElement
+                conf={props.conf} />
             <CoverElement
                 x={0}
                 y={0}
                 clicked={clicked}
                 selected={selected}
                 moved={moved}
+                conf={props.conf}
             />
             {
                 !props.started && <StartElement start={() => {
                     props.start()
-                }} />
+                }}
+                    conf={props.conf} />
             }
             {
-                props.ended && <EndElement />
+                props.ended && <EndElement
+                    conf={props.conf} />
             }
 
         </g >

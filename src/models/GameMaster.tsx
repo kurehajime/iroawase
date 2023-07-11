@@ -1,6 +1,5 @@
-import { t } from "i18next"
 import { CellType } from "../utils/CellType"
-import { COLS, MAX_NUM, ROWS } from "../utils/Conf"
+import { Conf } from "../utils/Conf"
 import Cell from "./Cell"
 import Field from "./Field"
 
@@ -10,22 +9,22 @@ export default class GameMaster {
             1, 1, 2, 2,
             3, 3, 4, 4,
             3, 3, 4, 4]
-    static fromArray(array: number[]): Field {
+    static fromArray(conf: Conf, array: number[]): Field {
         const Cells: Cell[] = []
-        for (let i = 0; i < COLS * ROWS; i++) {
+        for (let i = 0; i < conf.COLS * conf.ROWS; i++) {
             Cells.push(new Cell(i, array[i] as CellType))
         }
         return new Field(Cells)
     }
-    static createInitField(): Field {
-        return GameMaster.fromArray(GameMaster.initMap)
+    static createInitField(conf: Conf): Field {
+        return GameMaster.fromArray(conf, GameMaster.initMap)
     }
 
-    static createFillField(): Field {
-        const map = GameMaster.shuffleMap(GameMaster.initMap)
-        return GameMaster.fromArray(map)
+    static createFillField(conf: Conf,): Field {
+        const map = GameMaster.shuffleMap(conf, GameMaster.initMap)
+        return GameMaster.fromArray(conf, map)
     }
-    static complete(field: Field): boolean {
+    static complete(conf: Conf, field: Field): boolean {
         for (let i = 0; i < field.Cells.length; i++) {
             if (field.Cells[i].CellType !== this.initMap[i]) {
                 return false
@@ -34,54 +33,54 @@ export default class GameMaster {
         return true
     }
 
-    static shuffleMap(map: number[]): number[] {
+    static shuffleMap(conf: Conf, map: number[]): number[] {
         let newMap = [...map]
         for (let i = 0; i < 10; i++) {
             if (i % 2 === 0) {
-                const index = Math.floor(Math.random() * ROWS)
-                newMap = GameMaster.shiftHorizon(newMap, index, 1)
+                const index = Math.floor(Math.random() * conf.ROWS)
+                newMap = GameMaster.shiftHorizon(conf, newMap, index, 1)
             } else {
-                const index = Math.floor(Math.random() * COLS)
-                newMap = GameMaster.shiftVertical(newMap, index, 1)
+                const index = Math.floor(Math.random() * conf.COLS)
+                newMap = GameMaster.shiftVertical(conf, newMap, index, 1)
             }
         }
         return newMap
     }
 
-    static shiftHorizonField(field: Field, index: number, inc: number): Field {
+    static shiftHorizonField(conf: Conf, field: Field, index: number, inc: number): Field {
         const map = field.Cells.map(cell => cell.CellType)
-        return GameMaster.fromArray(GameMaster.shiftHorizon(map, index, inc))
+        return GameMaster.fromArray(conf, GameMaster.shiftHorizon(conf, map, index, inc))
     }
-    static shiftVerticalField(field: Field, index: number, inc: number): Field {
+    static shiftVerticalField(conf: Conf, field: Field, index: number, inc: number): Field {
         const map = field.Cells.map(cell => cell.CellType)
-        return GameMaster.fromArray(GameMaster.shiftVertical(map, index, inc))
+        return GameMaster.fromArray(conf, GameMaster.shiftVertical(conf, map, index, inc))
     }
-    private static shiftHorizon(map: number[], index: number, inc: number): number[] {
+    private static shiftHorizon(conf: Conf, map: number[], index: number, inc: number): number[] {
         const newMap = [...map]
         for (let i = 0; i < map.length; i++) {
-            const y = Math.floor(i / COLS)
-            const x = i % COLS
+            const y = Math.floor(i / conf.COLS)
+            const x = i % conf.COLS
             if (y !== index) continue
-            let x2 = (x + inc) % COLS
+            let x2 = (x + inc) % conf.COLS
             if (x2 < 0) {
-                x2 = COLS + x2
+                x2 = conf.COLS + x2
             }
-            const index2 = y * COLS + x2
+            const index2 = y * conf.COLS + x2
             newMap[i] = map[index2]
         }
         return newMap
     }
-    private static shiftVertical(map: number[], index: number, inc: number): number[] {
+    private static shiftVertical(conf: Conf, map: number[], index: number, inc: number): number[] {
         const newMap = [...map]
         for (let i = 0; i < map.length; i++) {
-            const y = Math.floor(i / COLS)
-            const x = i % COLS
+            const y = Math.floor(i / conf.COLS)
+            const x = i % conf.COLS
             if (x !== index) continue
-            let y2 = (y + inc) % ROWS
+            let y2 = (y + inc) % conf.ROWS
             if (y2 < 0) {
-                y2 = ROWS + y2
+                y2 = conf.ROWS + y2
             }
-            const index2 = y2 * COLS + x
+            const index2 = y2 * conf.COLS + x
             newMap[i] = map[index2]
         }
         return newMap

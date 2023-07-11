@@ -1,64 +1,66 @@
-import { COLORS, HEIGHT, PAD, WIDTH } from "../utils/Conf";
-
-export default function FrameElement() {
+import { Conf } from "../utils/Conf";
+type Props = {
+    conf: Conf
+}
+export default function FrameElement(props: Props) {
     return (
         <g>
             <rect
-                x={0 + (0 * (WIDTH / 2))}
-                y={0 + (0 * (HEIGHT / 2))}
-                width={WIDTH / 2}
-                height={PAD}
+                x={0 + (0 * (props.conf.WIDTH / 2))}
+                y={0 + (0 * (props.conf.HEIGHT / 2))}
+                width={props.conf.WIDTH / 2}
+                height={props.conf.PAD}
                 stroke="none"
-                fill={COLORS[0]} />
+                fill={props.conf.COLORS[0]} />
             <rect
-                x={0 + (0 * (WIDTH / 2))}
-                y={0 + (0 * (HEIGHT / 2))}
-                width={PAD}
-                height={HEIGHT / 2}
+                x={0 + (0 * (props.conf.WIDTH / 2))}
+                y={0 + (0 * (props.conf.HEIGHT / 2))}
+                width={props.conf.PAD}
+                height={props.conf.HEIGHT / 2}
                 stroke="none"
-                fill={COLORS[0]} />
+                fill={props.conf.COLORS[0]} />
             <rect
-                x={0 + (1 * (WIDTH / 2))}
-                y={0 + (0 * (HEIGHT / 2))}
-                width={WIDTH / 2}
-                height={PAD}
+                x={0 + (1 * (props.conf.WIDTH / 2))}
+                y={0 + (0 * (props.conf.HEIGHT / 2))}
+                width={props.conf.WIDTH / 2}
+                height={props.conf.PAD}
                 stroke="none"
-                fill={COLORS[1]} />
+                fill={props.conf.COLORS[1]} />
             <rect
-                x={-PAD + (2 * (WIDTH / 2))}
-                y={0 + (0 * (HEIGHT / 2))}
-                width={PAD}
-                height={HEIGHT / 2}
+                x={-props.conf.PAD + (2 * (props.conf.WIDTH / 2))}
+                y={0 + (0 * (props.conf.HEIGHT / 2))}
+                width={props.conf.PAD}
+                height={props.conf.HEIGHT / 2}
                 stroke="none"
-                fill={COLORS[1]} />
+                fill={props.conf.COLORS[1]} />
             <rect
-                x={0 + (0 * (WIDTH / 2))}
-                y={-PAD + (2 * (HEIGHT / 2))}
-                width={WIDTH / 2}
-                height={PAD}
+                x={0 + (0 * (props.conf.WIDTH / 2))}
+                y={-props.conf.PAD + (2 * (props.conf.HEIGHT / 2))}
+                width={props.conf.WIDTH / 2}
+                height={props.conf.PAD}
                 stroke="none"
-                fill={COLORS[2]} />
+                fill={props.conf.COLORS[2]} />
             <rect
-                x={0 + (0 * (WIDTH / 2))}
-                y={0 + (1 * (HEIGHT / 2))}
-                width={PAD}
-                height={HEIGHT / 2}
+                x={0 + (0 * (props.conf.WIDTH / 2))}
+                y={0 + (1 * (props.conf.HEIGHT / 2))}
+                width={props.conf.PAD}
+                height={props.conf.HEIGHT / 2}
                 stroke="none"
-                fill={COLORS[2]} />
+                fill={props.conf.COLORS[2]} />
             <rect
-                x={0 + (1 * (WIDTH / 2))}
-                y={-PAD + (2 * (HEIGHT / 2))}
-                width={WIDTH / 2}
-                height={PAD}
+                x={0 + (1 * (props.conf.WIDTH / 2))}
+                y={-props.conf.PAD + (2 * (props.conf.HEIGHT / 2))}
+                width={props.conf.WIDTH / 2}
+                height={props.conf.PAD}
                 stroke="none"
-                fill={COLORS[3]} />
+                fill={props.conf.COLORS[3]} />
             <rect
-                x={-PAD + (2 * (WIDTH / 2))}
-                y={0 + (1 * (HEIGHT / 2))}
-                width={PAD}
-                height={HEIGHT / 2}
+                x={-props.conf.PAD + (2 * (props.conf.WIDTH / 2))}
+                y={0 + (1 * (props.conf.HEIGHT / 2))}
+                width={props.conf.PAD}
+                height={props.conf.HEIGHT / 2}
                 stroke="none"
-                fill={COLORS[3]} />
+                fill={props.conf.COLORS[3]} />
         </g>
     )
 }

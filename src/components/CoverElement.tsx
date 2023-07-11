@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { BLOCK_SIZE, PAD, WIDTH } from "../utils/Conf"
+import { Conf } from "../utils/Conf"
 import { Point } from "../models/Point"
 
 type Props = {
@@ -8,6 +8,7 @@ type Props = {
     clicked: (point: Point, touched: boolean) => void
     moved: (target: Point | null, point: Point | null) => void
     selected: Point | null
+    conf: Conf
 }
 export default function CoverElement(props: Props) {
     const ref = React.useRef<SVGRectElement>(null)
@@ -62,13 +63,13 @@ export default function CoverElement(props: Props) {
             const diff_y = y - mouseStartY
             if (Math.abs(diff_x) < Math.abs(diff_y)) {
                 props.moved({
-                    x: Math.floor((x - PAD) / BLOCK_SIZE),
-                    y: Math.floor((y - PAD) / BLOCK_SIZE),
+                    x: Math.floor((x - props.conf.PAD) / props.conf.BLOCK_SIZE),
+                    y: Math.floor((y - props.conf.PAD) / props.conf.BLOCK_SIZE),
                 }, { x: 0, y: diff_y })
             } else {
                 props.moved({
-                    x: Math.floor((x - PAD) / BLOCK_SIZE),
-                    y: Math.floor((y - PAD) / BLOCK_SIZE),
+                    x: Math.floor((x - props.conf.PAD) / props.conf.BLOCK_SIZE),
+                    y: Math.floor((y - props.conf.PAD) / props.conf.BLOCK_SIZE),
                 }, { x: diff_x, y: 0 })
             }
         }
@@ -78,8 +79,8 @@ export default function CoverElement(props: Props) {
 
     const clicked = (x: number, y: number, touched = false) => {
         props.clicked({
-            x: Math.floor((x - PAD) / BLOCK_SIZE),
-            y: Math.floor((y - PAD) / BLOCK_SIZE),
+            x: Math.floor((x - props.conf.PAD) / props.conf.BLOCK_SIZE),
+            y: Math.floor((y - props.conf.PAD) / props.conf.BLOCK_SIZE),
         }, touched)
     }
 
@@ -98,15 +99,15 @@ export default function CoverElement(props: Props) {
     return (<g
         x={props.x}
         y={props.y}
-        width={WIDTH}
-        height={WIDTH}
+        width={props.conf.WIDTH}
+        height={props.conf.WIDTH}
     >
         <rect
             ref={ref}
             x={props.x}
             y={props.y}
-            width={WIDTH}
-            height={WIDTH}
+            width={props.conf.WIDTH}
+            height={props.conf.WIDTH}
             fill="transparent"
             stroke="transparent"
         />
