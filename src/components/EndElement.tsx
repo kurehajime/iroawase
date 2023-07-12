@@ -1,6 +1,9 @@
 import { Conf } from "../utils/Conf"
 import "./EndElement.css"
 type Props = {
+    restart: () => void
+    time: number
+    count: number
     conf: Conf
 }
 export default function EndElement(props: Props) {
@@ -31,33 +34,35 @@ export default function EndElement(props: Props) {
                 fill={props.conf.COLORS[3]}
                 opacity={0.5}
             ></rect>
-            <text x={props.conf.PAD} y={props.conf.HEIGHT / 2 - props.conf.BLOCK_SIZE3}
-                fontSize="95"
+            <text x={props.conf.WIDTH / 2} y={props.conf.HEIGHT / 2 - props.conf.BLOCK_SIZE3 * 0.5}
+                fontSize="70"
                 fontWeight="bold"
                 fill="white"
                 dominantBaseline="central"
+                textAnchor="middle"
                 className="end">
-                CONGR
+                CLEAR!
             </text>
-            <text x={props.conf.PAD} y={props.conf.HEIGHT / 2}
-                fontSize="95"
+            <text x={props.conf.WIDTH / 2} y={props.conf.HEIGHT / 2 + props.conf.BLOCK_SIZE3 * 0.5}
+                fontSize="30"
                 fontWeight="bold"
                 fill="white"
                 dominantBaseline="central"
-                className="end">
-                ATULA
+                textAnchor="middle">
+                Time: {`${(Math.floor(props.time / 60)).toString().padStart(2, "0")}:${(props.time % 60).toString().padStart(2, "0")}`}
             </text>
-            <text x={props.conf.PAD} y={props.conf.HEIGHT / 2 + props.conf.BLOCK_SIZE3}
-                fontSize="95"
+            <text x={props.conf.WIDTH / 2} y={props.conf.HEIGHT / 2 + props.conf.BLOCK_SIZE3 * 1}
+                fontSize="30"
                 fontWeight="bold"
                 fill="white"
                 dominantBaseline="central"
-                className="end">
-                TION!
+                textAnchor="middle">
+                {props.count}moves
             </text>
             <rect x={0} y={0}
                 width={props.conf.WIDTH} height={props.conf.HEIGHT}
                 fill="rgba(255,255,255,0)"
+                onClick={() => props.restart()}
             ></rect>
         </g>
     )

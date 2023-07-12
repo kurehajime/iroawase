@@ -24,17 +24,17 @@ export type Conf = {
     INIT_MAP: number[],
     SHUFFLE_COUNT: number,
 }
-export type Mode = "normal" | "hard"
+export type Mode = "easy" | "hard"
 export class ConfBuilder {
     static build(mode: Mode): Conf {
-        const maxNum = mode === "normal" ? 4 : 6;
-        const blockSize = mode === "normal" ? 96 : 64;
-        const cols = mode === "normal" ? 4 : 6;
-        const rows = mode === "normal" ? 4 : 6;
+        const maxNum = mode === "easy" ? 4 : 6;
+        const blockSize = mode === "easy" ? 96 : 64;
+        const cols = mode === "easy" ? 4 : 6;
+        const rows = mode === "easy" ? 4 : 6;
         const pad = 8;
         const width = (blockSize * cols) + pad * 2;
         const height = (blockSize * rows) + pad * 2;
-        const initMap = mode === "normal" ?
+        const initMap = mode === "easy" ?
             [1, 1, 2, 2,
                 1, 1, 2, 2,
                 3, 3, 4, 4,
@@ -57,7 +57,7 @@ export class ConfBuilder {
             SUIT: SUIT,
             MAX_NUM: maxNum,
             INIT_MAP: initMap,
-            SHUFFLE_COUNT: mode === "normal" ? 10 : 100,
+            SHUFFLE_COUNT: mode === "easy" ? 10 : 100,
         }
     }
 }

@@ -73,7 +73,7 @@ export default function StartElement(props: Props) {
             </g>
             <rect x={0} y={0}
                 width={props.conf.WIDTH} height={props.conf.HEIGHT}
-                onClick={() => props.start("normal")}
+                onClick={() => props.start("easy")}
                 fill="rgba(255,255,255,0.0)"
             ></rect>
             <rect x={props.conf.WIDTH / 2} y={props.conf.HEIGHT / 2}

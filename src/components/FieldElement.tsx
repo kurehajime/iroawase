@@ -15,17 +15,18 @@ type Props = {
     end: () => void
     started: boolean
     ended: boolean
+    restart: () => void
+    time: number
+    count: number
     conf: Conf
 }
 export default function FieldElement(props: Props) {
     const [selected, setSelected] = React.useState<Point | null>(null)
-    const [touched, setTouched] = React.useState<boolean>(false)
     const [diff, setDiff] = React.useState<Point | null>(null)
     const [target, setTarget] = React.useState<Point | null>(null)
-    const clicked = (point: Point, touched = false) => {
+    const clicked = (point: Point) => {
         if (selected) {
             setSelected(null)
-            setTouched(false)
 
             if (point.x === selected.x || point.y === selected.y) {
                 const xx = point.x - selected.x
@@ -39,7 +40,6 @@ export default function FieldElement(props: Props) {
             }
         } else {
             setSelected({ ...point })
-            setTouched(touched)
         }
     }
 
@@ -109,6 +109,9 @@ export default function FieldElement(props: Props) {
             }
             {
                 props.ended && <EndElement
+                    restart={props.restart}
+                    time={props.time}
+                    count={props.count}
                     conf={props.conf} />
             }
 
