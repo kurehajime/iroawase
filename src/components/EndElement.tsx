@@ -14,18 +14,22 @@ export default function EndElement(props: Props) {
             <rect x={0 * (props.conf.WIDTH / 2)} y={0 * (props.conf.HEIGHT / 2)}
                 width={props.conf.WIDTH / 2} height={props.conf.HEIGHT / 2}
                 fill={props.conf.COLORS[0]}
+                opacity={0.5}
             ></rect>
             <rect x={1 * (props.conf.WIDTH / 2)} y={0 * (props.conf.HEIGHT / 2)}
                 width={props.conf.WIDTH / 2} height={props.conf.HEIGHT / 2}
                 fill={props.conf.COLORS[1]}
+                opacity={0.5}
             ></rect>
             <rect x={0 * (props.conf.WIDTH / 2)} y={1 * (props.conf.HEIGHT / 2)}
                 width={props.conf.WIDTH / 2} height={props.conf.HEIGHT / 2}
                 fill={props.conf.COLORS[2]}
+                opacity={0.5}
             ></rect>
             <rect x={1 * (props.conf.WIDTH / 2)} y={1 * (props.conf.HEIGHT / 2)}
                 width={props.conf.WIDTH / 2} height={props.conf.HEIGHT / 2}
                 fill={props.conf.COLORS[3]}
+                opacity={0.5}
             ></rect>
             <text x={props.conf.PAD} y={props.conf.HEIGHT / 2 - props.conf.BLOCK_SIZE3}
                 fontSize="95"

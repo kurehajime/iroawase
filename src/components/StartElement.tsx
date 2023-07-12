@@ -28,18 +28,54 @@ export default function StartElement(props: Props) {
                 className="title">
                 SWISH
             </text>
-            <text x={props.conf.PAD} y={3 * props.conf.BLOCK_SIZE3}
+            {/* <text x={props.conf.PAD} y={3 * props.conf.BLOCK_SIZE3}
                 fontSize="75"
                 fontWeight="bold"
                 fill="white"
                 className="title"
             >
                 SWOOSH
-            </text>
+            </text> */}
+            <g>
+                <rect x={props.conf.PAD}
+                    y={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 2.75)}
+                    width={props.conf.BLOCK_SIZE3 * 2 - 3} height={props.conf.BLOCK_SIZE3 * 0.5}
+                    fill={"white"}
+                    className="level"
+                    opacity={0.9}
+                ></rect>
+                <text x={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 1)} y={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 3)}
+                    dominantBaseline="central"
+                    textAnchor="middle"
+                    fontSize={props.conf.BLOCK_SIZE3 * 0.3}
+                    fontWeight="bold"
+                    fill="black"
+                >
+                    🐣EASY
+                </text>
+            </g>
+            <g>
+                <rect x={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 2 + 3)}
+                    y={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 2.75)}
+                    width={props.conf.BLOCK_SIZE3 * 2 - 3} height={props.conf.BLOCK_SIZE3 * 0.5}
+                    fill={"white"}
+                    className="level"
+                    opacity={0.9}
+                ></rect>
+                <text x={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 3)} y={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 3)}
+                    dominantBaseline="central"
+                    textAnchor="middle"
+                    fontSize={props.conf.BLOCK_SIZE3 * 0.3}
+                    fontWeight="bold"
+                    fill="black"
+                >
+                    🔥HARD
+                </text>
+            </g>
             <rect x={0} y={0}
                 width={props.conf.WIDTH} height={props.conf.HEIGHT}
                 onClick={() => props.start()}
-                fill="rgba(0,0,0,0)"
+                fill="rgba(255,255,255,0.1)"
             ></rect>
         </g>
     )
