@@ -33,7 +33,7 @@ export default function CellElement(props: Props) {
                             props.cell.CellType === 3 ? props.conf.SUIT[2] :
                                 props.cell.CellType === 4 ? props.conf.SUIT[3] :
                                     "white"
-                }</text>
+                }&#xfe0e;</text>
         </g>
     )
 }
