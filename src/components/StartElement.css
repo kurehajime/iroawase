@@ -2,6 +2,10 @@
     filter: drop-shadow(3px 3px 5px #000);
 }
 
+.title_shadow {
+    mix-blend-mode: difference;
+}
+
 .level {
     filter: drop-shadow(3px 3px 5px #000);
 }
