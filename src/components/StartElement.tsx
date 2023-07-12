@@ -1,7 +1,7 @@
 import { Conf } from "../utils/Conf"
 import "./StartElement.css"
 type Props = {
-    start: () => void
+    start: (level: string) => void
     conf: Conf
 }
 export default function StartElement(props: Props) {
@@ -73,8 +73,13 @@ export default function StartElement(props: Props) {
             </g>
             <rect x={0} y={0}
                 width={props.conf.WIDTH} height={props.conf.HEIGHT}
-                onClick={() => props.start()}
-                fill="rgba(255,255,255,0.1)"
+                onClick={() => props.start("normal")}
+                fill="rgba(255,255,255,0.0)"
+            ></rect>
+            <rect x={props.conf.WIDTH / 2} y={props.conf.HEIGHT / 2}
+                width={props.conf.WIDTH / 2} height={props.conf.HEIGHT / 2}
+                onClick={() => props.start("hard")}
+                fill="rgba(255,255,255,0.0)"
             ></rect>
         </g>
     )

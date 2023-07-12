@@ -11,7 +11,7 @@ import EndElement from "./EndElement"
 type Props = {
     field: Field
     shift: (cursor: Point, inc: Point) => void
-    start: () => void
+    start: (level: string) => void
     end: () => void
     started: boolean
     ended: boolean
@@ -104,9 +104,7 @@ export default function FieldElement(props: Props) {
                 conf={props.conf}
             />
             {
-                !props.started && <StartElement start={() => {
-                    props.start()
-                }}
+                !props.started && <StartElement start={props.start}
                     conf={props.conf} />
             }
             {

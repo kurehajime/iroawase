@@ -40,9 +40,12 @@ export default function GameElement() {
             className="canv">
             <FieldElement field={field}
                 shift={shift}
-                start={() => {
+                start={(level: string) => {
+                    setMode(level as Mode)
+                    const newConf = ConfBuilder.build(level as Mode)
+                    console.log(level)
                     setStart(true)
-                    setField(GameMaster.createFillField(conf))
+                    setField(GameMaster.createFillField(newConf))
                 }}
                 started={start}
                 end={
