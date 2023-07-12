@@ -5,10 +5,10 @@ const COLORS = [
     "#FF0F77",
 ]
 const SUIT = [
-    "♠",
-    "♣",
-    "♦",
-    "♥",
+    "♠\uFE0E",
+    "♣\uFE0E",
+    "♦\uFE0E",
+    "♥\uFE0E",
 ]
 export type Conf = {
     BLOCK_SIZE: number,
