@@ -27,16 +27,13 @@ export default function FieldElement(props: Props) {
     const clicked = (point: Point) => {
         if (selected) {
             setSelected(null)
-
-            if (point.x === selected.x || point.y === selected.y) {
-                const xx = point.x - selected.x
-                const yy = point.y - selected.y
-                if (xx !== 0) {
-                    props.shift({ x: point.x, y: point.y }, { x: xx, y: 0 })
-                }
-                if (yy !== 0) {
-                    props.shift({ x: point.x, y: point.y }, { x: 0, y: yy })
-                }
+            const xx = point.x - selected.x
+            const yy = point.y - selected.y
+            if (diff && Math.abs(diff.x) > Math.abs(diff.y)) {
+                props.shift({ x: selected.x, y: selected.y }, { x: xx, y: 0 })
+            }
+            if (diff && Math.abs(diff.y) > Math.abs(diff.x)) {
+                props.shift({ x: selected.x, y: selected.y }, { x: 0, y: yy })
             }
         } else {
             setSelected({ ...point })
@@ -44,15 +41,9 @@ export default function FieldElement(props: Props) {
     }
 
     const moved = (target: Point | null, point: Point | null) => {
-        if (target && selected && target.x !== selected.x && target.y !== selected.y) {
-            setDiff(null)
-            setTarget(null)
-        } else {
-            setDiff(point)
-            setTarget(target)
-        }
+        setDiff(point)
+        setTarget(target)
     }
-
     return (
         <g>
             {
@@ -61,10 +52,10 @@ export default function FieldElement(props: Props) {
                     const iy = Math.floor(index / props.conf.ROWS)
                     let x = ix * props.conf.BLOCK_SIZE
                     let y = iy * props.conf.BLOCK_SIZE
-                    if (diff && target && target.y === iy) {
+                    if (diff && selected && Math.abs(diff.x) > Math.abs(diff.y) && selected.y === iy) {
                         x += diff.x
                     }
-                    if (diff && target && target.x === ix) {
+                    if (diff && selected && Math.abs(diff.x) < Math.abs(diff.y) && selected.x === ix) {
                         y += diff.y
                     }
                     return (
