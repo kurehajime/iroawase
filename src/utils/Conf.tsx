@@ -57,7 +57,7 @@ export class ConfBuilder {
             SUIT: SUIT,
             MAX_NUM: maxNum,
             INIT_MAP: initMap,
-            SHUFFLE_COUNT: mode === "easy" ? 10 : 100,
+            SHUFFLE_COUNT: mode === "easy" ? 100 : 100,
         }
     }
 }
