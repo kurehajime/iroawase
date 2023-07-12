@@ -19,7 +19,8 @@ export default function BackElement() {
     return (
         <div className="back">
             {
-                message.repeat(100)
+                // ほんとは100くらいにしたいけどSafariが激重になる
+                message.repeat(20)
             }
         </div>
     )
