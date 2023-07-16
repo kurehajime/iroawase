@@ -7,6 +7,7 @@ import CoverElement from "./CoverElement"
 import FrameElement from "./FrameElement"
 import StartElement from "./StartElement"
 import EndElement from "./EndElement"
+import ShadowElement from "./ShadowElement"
 
 type Props = {
     field: Field
@@ -86,6 +87,11 @@ export default function FieldElement(props: Props) {
             }
             <FrameElement
                 conf={props.conf} />
+            <ShadowElement
+                selected={selected}
+                diff={diff}
+                conf={props.conf}
+            />
             <CoverElement
                 x={0}
                 y={0}
