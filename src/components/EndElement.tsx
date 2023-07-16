@@ -65,18 +65,31 @@ export default function EndElement(props: Props) {
                 fill="rgba(255,255,255,0)"
                 onClick={() => props.restart()}
             ></rect>
-            <text x={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 3.5)} y={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 3.5)}
-                fontSize="60"
+            <text x={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 0.5)} y={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 3.5)}
+                fontSize="14"
                 fontWeight="bold"
                 fill="white"
                 dominantBaseline="central"
                 textAnchor="middle">
-                ⏯
+                PLAYBACK
+            </text>
+            <rect x={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 0)} y={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 3)}
+                width={props.conf.BLOCK_SIZE3} height={props.conf.BLOCK_SIZE3}
+                fill="rgba(255,255,255,0.5)"
+                onClick={() => props.replay()}
+            ></rect>
+            <text x={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 3.5)} y={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 3.5)}
+                fontSize="14"
+                fontWeight="bold"
+                fill="white"
+                dominantBaseline="central"
+                textAnchor="middle">
+                NEW GAME
             </text>
             <rect x={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 3)} y={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 3)}
                 width={props.conf.BLOCK_SIZE3} height={props.conf.BLOCK_SIZE3}
                 fill="rgba(255,255,255,0.5)"
-                onClick={() => props.replay()}
+                onClick={() => props.restart()}
             ></rect>
         </g>
     )
