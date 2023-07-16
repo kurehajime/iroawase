@@ -7,9 +7,12 @@ import { Point } from "../models/Point";
 import React from "react";
 import { useTimer } from "use-timer";
 import "./GameElement.css"
+import { Log } from "../models/Log";
+import ReplayElement from "./ReplayElement";
 
 export default function GameElement() {
     const { time: time, start: startTime, pause: pauseTime, reset: resetTime } = useTimer({ endTime: 999 })
+    const { time: timeReplay, start: startReplayTime, pause: pauseReplayTime, reset: resetReplayTime } = useTimer({ interval: 200 })
     const [count, setCount] = React.useState<number>(0)
     const [mode, setMode] = React.useState<Mode>("easy")
     const conf = ConfBuilder.build(mode)
@@ -17,14 +20,20 @@ export default function GameElement() {
     const [start, setStart] = React.useState<boolean>(false)
     const [ended, setEnded] = React.useState<boolean>(false)
     const [lock, setLock] = React.useState<boolean>(false)
+    const [initMap, setInitMap] = React.useState<number[]>([])
+    const [log, setLog] = React.useState<Log>([])
+    const [logIndex, setLogIndex] = React.useState<number>(0)
+    const [replay, setReplay] = React.useState<boolean>(false)
     const check = (f: Field) => {
         if (GameMaster.complete(conf, f)) {
-            pauseTime()
-            setEnded(true)
-            setLock(true)
-            setTimeout(() => {
-                setLock(false)
-            }, 500)
+            if (!replay) {
+                pauseTime()
+                setEnded(true)
+                setLock(true)
+                setTimeout(() => {
+                    setLock(false)
+                }, 500)
+            }
         }
     }
     const restart = () => {
@@ -37,48 +46,91 @@ export default function GameElement() {
     const shift = (cursor: Point, inc: Point) => {
         if (inc.x !== 0) {
             const f = GameMaster.shiftHorizonField(conf, field, cursor.y, -1 * inc.x)
+            if (!replay) {
+                setLog(l => [...l, [cursor, inc]])
+                setCount(c => c + 1)
+            }
             setField(f)
             check(f)
-            setCount(c => c + 1)
         }
         if (inc.y !== 0) {
             const f = GameMaster.shiftVerticalField(conf, field, cursor.x, -1 * inc.y)
+            if (!replay) {
+                setLog(l => [...l, [cursor, inc]])
+                setCount(c => c + 1)
+            }
             setField(f)
             check(f)
-            setCount(c => c + 1)
         }
     }
+    const startFunc = (level: string) => {
+        setMode(level as Mode)
+        const newConf = ConfBuilder.build(level as Mode)
+        console.log(level)
+        setStart(true)
+        const f = GameMaster.createFillField(newConf)
+        setField(f)
+        setInitMap(GameMaster.toArray(f))
+        setLog([])
+        resetTime()
+        startTime()
+        setCount(0)
+        setReplay(false)
+    }
+    const endFunc = () => {
+        setEnded(false)
+        setStart(true)
+        setField(GameMaster.createInitField(conf))
+    }
+    const replayFunc = () => {
+        setField(GameMaster.fromArray(conf, initMap))
+        setEnded(false)
+        setReplay(true)
+        resetReplayTime()
+        startReplayTime()
+    }
+    const endReplay = () => {
+        pauseReplayTime()
+        setLogIndex(0)
+        setReplay(false)
+        setEnded(true)
+    }
+    React.useEffect(() => {
+        if (replay) {
+            if (logIndex >= log.length) {
+                endReplay()
+                return
+            }
+            const l = log[logIndex]
+            if (l) {
+                const [cursor, inc] = l
+                shift(cursor, inc)
+                setLogIndex(i => i + 1)
+            }
+        }
 
+    }, [replay, timeReplay])
     return (
         <>
             <svg width={conf.WIDTH} height={conf.HEIGHT}
                 className="canv">
                 <FieldElement field={field}
                     shift={shift}
-                    start={(level: string) => {
-                        setMode(level as Mode)
-                        const newConf = ConfBuilder.build(level as Mode)
-                        console.log(level)
-                        setStart(true)
-                        setField(GameMaster.createFillField(newConf))
-                        resetTime()
-                        startTime()
-                        setCount(0)
-                    }}
+                    start={startFunc}
+                    replay={replayFunc}
                     started={start}
-                    end={
-                        () => {
-                            setEnded(false)
-                            setStart(true)
-                            setField(GameMaster.createInitField(conf))
-                        }
-                    }
+                    end={endFunc}
                     ended={ended}
                     restart={restart}
                     time={time}
                     count={count}
                     conf={conf}
                 />
+                {
+                    replay && <ReplayElement
+                        conf={conf}
+                        endReplay={endReplay} />
+                }
             </svg>
             <span className="score">
                 {mode}/{`${(Math.floor(time / 60)).toString().padStart(2, "0")}:${(time % 60).toString().padStart(2, "0")}`}

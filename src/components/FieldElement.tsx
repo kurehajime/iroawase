@@ -14,6 +14,7 @@ type Props = {
     shift: (cursor: Point, inc: Point) => void
     start: (level: string) => void
     end: () => void
+    replay: () => void
     started: boolean
     ended: boolean
     restart: () => void
@@ -107,6 +108,7 @@ export default function FieldElement(props: Props) {
             {
                 props.ended && <EndElement
                     restart={props.restart}
+                    replay={props.replay}
                     time={props.time}
                     count={props.count}
                     conf={props.conf} />

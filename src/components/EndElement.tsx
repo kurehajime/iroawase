@@ -2,6 +2,7 @@ import { Conf } from "../utils/Conf"
 import "./EndElement.css"
 type Props = {
     restart: () => void
+    replay: () => void
     time: number
     count: number
     conf: Conf
@@ -63,6 +64,19 @@ export default function EndElement(props: Props) {
                 width={props.conf.WIDTH} height={props.conf.HEIGHT}
                 fill="rgba(255,255,255,0)"
                 onClick={() => props.restart()}
+            ></rect>
+            <text x={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 3.5)} y={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 3.5)}
+                fontSize="60"
+                fontWeight="bold"
+                fill="white"
+                dominantBaseline="central"
+                textAnchor="middle">
+                ⏯
+            </text>
+            <rect x={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 3)} y={props.conf.PAD + (props.conf.BLOCK_SIZE3 * 3)}
+                width={props.conf.BLOCK_SIZE3} height={props.conf.BLOCK_SIZE3}
+                fill="rgba(255,255,255,0.5)"
+                onClick={() => props.replay()}
             ></rect>
         </g>
     )

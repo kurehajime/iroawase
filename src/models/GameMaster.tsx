@@ -11,6 +11,9 @@ export default class GameMaster {
         }
         return new Field(Cells)
     }
+    static toArray(field: Field): number[] {
+        return field.Cells.map(c => c.CellType)
+    }
     static createInitField(conf: Conf): Field {
         return GameMaster.fromArray(conf, conf.INIT_MAP)
     }
