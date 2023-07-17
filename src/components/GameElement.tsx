@@ -129,6 +129,8 @@ export default function GameElement() {
                 {
                     replay && <ReplayElement
                         conf={conf}
+                        log={log}
+                        logIndex={logIndex}
                         endReplay={endReplay} />
                 }
             </svg>
