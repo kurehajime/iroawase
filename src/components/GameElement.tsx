@@ -12,7 +12,7 @@ import ReplayElement from "./ReplayElement";
 
 export default function GameElement() {
     const { time: time, start: startTime, pause: pauseTime, reset: resetTime } = useTimer({ endTime: 999 })
-    const { time: timeReplay, start: startReplayTime, pause: pauseReplayTime, reset: resetReplayTime } = useTimer({ interval: 200 })
+    const { time: timeReplay, start: startReplayTime, pause: pauseReplayTime, reset: resetReplayTime } = useTimer({ interval: 250 })
     const [count, setCount] = React.useState<number>(0)
     const [mode, setMode] = React.useState<Mode>("easy")
     const conf = ConfBuilder.build(mode)
