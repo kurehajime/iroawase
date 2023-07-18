@@ -1,4 +1,4 @@
-import { CellType } from "../utils/CellType";
+import { CellType } from "./CellType";
 
 export default class Cell {
     private _CellType: CellType

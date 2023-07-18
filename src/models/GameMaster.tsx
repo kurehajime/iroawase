@@ -1,4 +1,4 @@
-import { CellType } from "../utils/CellType"
+import { CellType } from "./CellType"
 import { Conf } from "../utils/Conf"
 import Cell from "./Cell"
 import Field from "./Field"
