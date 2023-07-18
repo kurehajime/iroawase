@@ -9,6 +9,7 @@ import { useTimer } from "use-timer";
 import "./GameElement.css"
 import { Log } from "../models/Log";
 import ReplayElement from "./ReplayElement";
+import URLManager from "../models/URLManager";
 
 export default function GameElement() {
     const { time: time, start: startTime, pause: pauseTime, reset: resetTime } = useTimer({ endTime: 999 })
@@ -83,11 +84,16 @@ export default function GameElement() {
         setField(GameMaster.createInitField(conf))
     }
     const replayFunc = () => {
-        setField(GameMaster.fromArray(conf, initMap))
+        const f = GameMaster.fromArray(conf, initMap)
+        setField(f)
         setEnded(false)
         setReplay(true)
         resetReplayTime()
         startReplayTime()
+        const url = new URL(window.location.toString())
+        const searchParams = URLManager.generateSearchParams(f, log, mode)
+        url.search = searchParams.toString()
+        history.pushState("", document.title, url.href);
     }
     const endReplay = () => {
         pauseReplayTime()
