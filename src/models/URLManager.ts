@@ -5,24 +5,26 @@ import { Log } from "./Log";
 import { Point } from "./Point";
 
 export default class URLManager {
-    static generateSearchParams(field: Field, log: Log, mode: Mode): URLSearchParams {
-        const fStr = GameMaster.toArray(field).join('')
+    static generateSearchParams(initArray: number[], log: Log, mode: Mode, time: number): URLSearchParams {
+        const fStr = initArray.join('')
         const lStr = log.map((l) => {
             return `${l[0].x}a${l[0].y}b${l[1].x}c${l[1].y}`
         }).join("d")
         const params = {
             f: fStr,
             l: lStr,
-            m: mode
+            m: mode,
+            t: time.toString(),
         }
         return new URLSearchParams(params)
     }
-    static parseSearchParams(params: string): [Field, Log, Mode] | null {
+    static parseSearchParams(params: string): [Field, Log, Mode, number] | null {
         const urlParams = new URLSearchParams(params)
         const fStr = urlParams.get('f')
         const lStr = urlParams.get('l')
         const mStr = urlParams.get('m')
-        if (fStr && lStr && mStr) {
+        const tStr = urlParams.get('t')
+        if (fStr && lStr && mStr && tStr) {
             const mode = mStr as Mode
             const conf = ConfBuilder.build(mode)
             const field = GameMaster.fromArray(conf, fStr.split('').map((c) => { return parseInt(c) }))
@@ -35,7 +37,7 @@ export default class URLManager {
                     { x: parseInt(p2Str[0]), y: parseInt(p2Str[1]) } as Point,
                 ]
             }) as Log
-            return [field, log, mode]
+            return [field, log, mode, parseInt(tStr)]
         }
 
         return null
