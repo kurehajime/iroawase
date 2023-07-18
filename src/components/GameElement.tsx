@@ -83,7 +83,6 @@ export default function GameElement() {
     const startFunc = (level: string) => {
         setMode(level as Mode)
         const newConf = ConfBuilder.build(level as Mode)
-        console.log(level)
         setStart(true)
         const f = GameMaster.createFillField(newConf)
         setField(f)
@@ -128,7 +127,6 @@ export default function GameElement() {
             const result = URLManager.parseSearchParams(searchParams.toString())
             if (result) {
                 const [f, l, m, t] = result
-                console.log(result)
                 setMode(m)
                 setField(f)
                 setLog(l)
