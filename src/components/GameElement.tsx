@@ -31,6 +31,10 @@ export default function GameElement() {
                 pauseTime()
                 setEnded(true)
                 setLock(true)
+                const url = new URL(window.location.toString())
+                const searchParams = URLManager.generateSearchParams(f, log, mode)
+                url.search = searchParams.toString()
+                history.pushState("", document.title, url.href);
                 setTimeout(() => {
                     setLock(false)
                 }, 500)
@@ -42,6 +46,9 @@ export default function GameElement() {
             setEnded(false)
             setStart(false)
             setField(GameMaster.createInitField(conf))
+            const url = new URL(window.location.toString())
+            url.search = ''
+            history.pushState("", document.title, url.href);
         }
     }
     const shift = (cursor: Point, inc: Point) => {
@@ -77,6 +84,9 @@ export default function GameElement() {
         startTime()
         setCount(0)
         setReplay(false)
+        const url = new URL(window.location.toString())
+        url.search = ''
+        history.pushState("", document.title, url.href);
     }
     const endFunc = () => {
         setEnded(false)
@@ -90,10 +100,6 @@ export default function GameElement() {
         setReplay(true)
         resetReplayTime()
         startReplayTime()
-        const url = new URL(window.location.toString())
-        const searchParams = URLManager.generateSearchParams(f, log, mode)
-        url.search = searchParams.toString()
-        history.pushState("", document.title, url.href);
     }
     const endReplay = () => {
         pauseReplayTime()
