@@ -6,13 +6,13 @@
         "@types/node": "^20.4.2",
         "@types/react": "^18.2.15",
         "@types/react-dom": "^18.2.7",
+        "i18next": "^23.2.11",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "react-i18next": "^13.0.2",
         "typescript": "^5.1.6",
-        "use-sound": "^4.0.1",
-        "use-timer": "^2.0.1",
-        "i18next": "^23.2.11",
-        "react-i18next": "^13.0.2"
+        "use-sound": "^5.0.0",
+        "use-timer": "^2.0.1"
     },
     "scripts": {
         "dev": "vite",
