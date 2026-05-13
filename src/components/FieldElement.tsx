@@ -25,7 +25,7 @@ type Props = {
 export default function FieldElement(props: Props) {
     const [selected, setSelected] = React.useState<Point | null>(null)
     const [diff, setDiff] = React.useState<Point | null>(null)
-    const [target, setTarget] = React.useState<Point | null>(null)
+    const [, setTarget] = React.useState<Point | null>(null)
     const clicked = (point: Point) => {
         if (selected) {
             setSelected(null)
